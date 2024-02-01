@@ -2,12 +2,12 @@
     <div>championnats :</div>
     <ul>
       <li *ngFor="let championship of championships">
-        <div (click)="toggleTeamVisibility(championship.id)">{{ championship.name }} </div>
-            <ul *ngIf="teamVisibility[championship.id]">
+        <div>{{ championship.name }} </div>
+            <!--<ul *ngIf="teamVisibility[championship.id]">
                 <li *ngFor="let team of championship.teams">
                     <div (click)="getDefaultStatistique(team.id)">{{ team.name }} </div>
                 </li>
-            </ul>
+            </ul>-->
       </li>
     </ul>
   </div>

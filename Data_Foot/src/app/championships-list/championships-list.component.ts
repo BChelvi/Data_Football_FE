@@ -20,16 +20,17 @@ export class ChampionshipsListComponent {
     // Injection du service ChampionshipsService via le constructeur
   constructor(private championshipsService: ChampionshipsListService) {}
 
-  teamVisibility: { [championshipId: number]: boolean } = {};
+  //teamVisibility: { [championshipId: number]: boolean } = {};
 
   ngOnInit(): void {
     this.championshipsService.loadChampionships().subscribe({
       next: (championships: ChampionshipInterface[]) => {
-        this.championships = championships;
+        this.championships = championships.results;
+        console.log(this.championships)
         // Initialiser l'état de visibilité pour chaque championnat
-        championships.forEach(championship => {
+        /*championships.forEach(championship => {
           this.teamVisibility[championship.id] = false;
-        });
+        });*/
       },
       // pensez a rajouter l'erreur de l'observable
     });
@@ -37,7 +38,7 @@ export class ChampionshipsListComponent {
 
 
   // Fonction pour basculer la visibilité des équipes
-  toggleTeamVisibility(championshipId: number): void {
+  /*toggleTeamVisibility(championshipId: number): void {
     this.championships.forEach(championship => {
       this.teamVisibility[championship.id] = false;
     });
@@ -46,7 +47,7 @@ export class ChampionshipsListComponent {
 
   getDefaultStatistique(team_id:string){
     console.log("team id : "+team_id)
-  }
+  }*/
 
 }
 

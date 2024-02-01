@@ -7,7 +7,7 @@ import { ChampionshipInterface } from './championships-list/shared/interfaces/ch
 })
 export class ChampionshipsListService {
 
-  static url = 'assets/championship.json';
+  static url = 'http://localhost:8001/competitions/';
 
   constructor(private http: HttpClient) { }
 

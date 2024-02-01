@@ -1,5 +1,5 @@
 export interface ChampionshipInterface { 
-	id: number; 
+	id: string; 
 	name: string; 
-    teams : any;
+    /*teams : any;*/
 }
