@@ -1,0 +1,20 @@
+<div *ngIf="championships.length > 0; else noChampionships" class="p-3 border rounded">
+    <div>championnats :</div>
+    <ul>
+      <li *ngFor="let championship of championships">
+        <div (click)="toggleTeamVisibility(championship.id)">{{ championship.name }} </div>
+            <ul *ngIf="teamVisibility[championship.id]">
+                <li *ngFor="let team of championship.teams">
+                    <div (click)="getDefaultStatistique(team.id)">{{ team.name }} </div>
+                </li>
+            </ul>
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noChampionships>
+    <p>Aucun championnat trouvé.</p>
+  </ng-template>
+  
+  <p *ngIf="error">{{ error }}</p>
+

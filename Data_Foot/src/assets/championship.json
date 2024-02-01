@@ -1,0 +1,74 @@
+[
+    {
+        "name":"Liga",
+        "id":1,
+        "teams":[
+            {
+                "name":"Barcelone",
+                "id":1
+            },
+            {
+                "name":"Real Madrid",
+                "id":2
+            },
+            {
+                "name":"Athletico Madrid",
+                "id":3
+            }
+        ]
+    },
+    {
+        "name":"Ligue 1",
+        "id":2,
+        "teams":[
+            {
+                "name":"Barcelone",
+                "id":4
+            },
+            {
+                "name":"Barcelone",
+                "id":5
+            },
+            {
+                "name":"Barcelone",
+                "id":6
+            }
+        ]
+    },
+    {
+        "name":"Ligue Allemande",
+        "id":3,
+        "teams":[
+            {
+                "name":"Barcelone",
+                "id":7
+            },
+            {
+                "name":"Barcelone",
+                "id":8
+            },
+            {
+                "name":"Barcelone",
+                "id":9
+            }
+        ]
+    },
+    {
+        "name":"Ligue Belge",
+        "id":4,
+        "teams":[
+            {
+                "name":"Barcelone",
+                "id":10
+            },
+            {
+                "name":"Barcelone",
+                "id":11
+            },
+            {
+                "name":"Barcelone",
+                "id":12
+            }
+        ]
+    }
+]
