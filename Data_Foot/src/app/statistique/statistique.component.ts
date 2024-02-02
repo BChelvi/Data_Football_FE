@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from '../data-service.service';
 import { CommonModule } from '@angular/common';
+import { GraphiqueComponent } from "../graphique/graphique.component";
 
-import { error } from 'console';
 
 @Component({
-  selector: 'app-statistique',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './statistique.component.html',
-  styleUrl: './statistique.component.css'
+    selector: 'app-statistique',
+    standalone: true,
+    templateUrl: './statistique.component.html',
+    styleUrl: './statistique.component.css',
+    imports: [CommonModule, GraphiqueComponent]
 })
 
 export class StatistiqueComponent implements OnInit {
@@ -17,14 +17,14 @@ export class StatistiqueComponent implements OnInit {
   constructor(private DataServiceService: DataServiceService) {}
 
   ngOnInit(): void {
-    this.DataServiceService.getStats().subscribe(
+    /*this.DataServiceService.getStats().subscribe(
       (data) => {
         this.stats = data;
       },
       (error) => {
         console.error('Error fetching stats:', error);
       }
-    );
+    );*/
   }
 }
 

@@ -11,7 +11,10 @@ import { DataServiceService } from '../data-service.service';
 })
 export class GraphiqueComponent{
   saleData: any;
-  constructor(private DataServiceService: DataServiceService) {
-    // You can use statsService here if needed
+  
+  constructor(private dataService: DataServiceService) {}
+
+  ngOnInit() {
+    this.saleData = this.dataService.getsaleData();
   }
 }

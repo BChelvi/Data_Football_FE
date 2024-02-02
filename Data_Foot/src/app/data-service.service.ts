@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataServiceService {
-  private apiUrl = 'your_backend_api_url';
+  //private apiUrl = 'your_backend_api_url';
+
   saleData = [
     { name: "Mobiles", value: 105000 },
     { name: "Laptop", value: 55000 },
@@ -17,7 +18,11 @@ export class DataServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getStats(): Observable<any> {
+  /*getStats(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/stats`);
+  }*/
+
+  getsaleData() {
+    return this.saleData;
   }
 }
