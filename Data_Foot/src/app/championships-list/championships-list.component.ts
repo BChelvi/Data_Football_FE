@@ -25,7 +25,7 @@ export class ChampionshipsListComponent {
   ngOnInit(): void {
     this.championshipsService.loadChampionships().subscribe({
       next: (championships: ChampionshipInterface[]) => {
-        this.championships = championships.results;
+        this.championships = championships;
         console.log(this.championships)
         // Initialiser l'état de visibilité pour chaque championnat
         /*championships.forEach(championship => {
