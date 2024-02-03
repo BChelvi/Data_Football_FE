@@ -6,11 +6,11 @@
 
 
           <div *ngFor="let championship of championships">
-            <div class="border rounded mt-2 d-flex justify-content-between zoom team">
+            <div class="border rounded mt-2 d-flex justify-content-between zoom team"  (click)="toggleTeamVisibility(championship.competition_id)">
               <div class="p-1">{{ championship.name }} </div>
               <div class="border">img</div>
             </div>
-                <ul >
+                <ul *ngIf="teamVisibility[championship.competition_id]">
                     <li *ngFor="let club of championship.clubs">
                         <div >{{ club.name }} </div>
                     </li>
