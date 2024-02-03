@@ -1,24 +1,14 @@
-.zoom:hover{
-    /* font-size: larger; */
-    opacity: 1;
-    /* transform: scale(1.1); */
-    font-weight: bolder;
+
+
+.selected-text {
+    color: white;
+
+  }
+
+.selected-background {
+    background-color: black;
 }
 
-.stat{
-    opacity : 0.8;
-}
-
-.periode{
-    opacity : 0.8;
-}
-
-.periode:hover{
-    opacity: 1;
-    /* transform: scale(1.1); */
-    font-weight: bolder;
-}
-
-.periode:active{
-    transform: scale(1.1);
+.selected-text-stat{
+    color : red
 }

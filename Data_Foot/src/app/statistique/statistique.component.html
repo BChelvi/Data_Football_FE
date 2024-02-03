@@ -5,32 +5,32 @@
   <div class="col-8 object-fit-contain">
     <app-graphique></app-graphique>
   </div>
-  <div class="col-2">
-    <div class="border border-success border-2 rounded p-3">
-      <div #stat1 class="">
-        <p class="zoom stat">Buts marqués</p>
-      </div>
-      <div #stat2 class="">
-        <p class="zoom stat">Ratio Victoires / Défaites</p>
-      </div>
-      <div #stat3 class="">
-        <p class="zoom stat">Buts marqués par joueur</p>
-      </div>
-    </div>   
+  <div class="col-2 border border-dark">
+    <div #stat1 [ngClass]="{'selected-text-stat': selectedStatStates[0]}" (click)="selectionChanged('Statistique', 'Buts marqués', 0, 'selectedStatStates')">
+      <div class="text-center">Buts marqués</div>
+    </div>
+    <div #stat2 [ngClass]="{'selected-text-stat': selectedStatStates[1]}" (click)="selectionChanged('Statistique', 'Ratio', 1, 'selectedStatStates')">
+      <div class="text-center">Ratio</div>
+    </div>
+    <div #stat3 [ngClass]="{'selected-text-stat': selectedStatStates[2]}" (click)="selectionChanged('Statistique', 'Buts marqués par joueur', 2, 'selectedStatStates')">
+      <div class="text-center">Buts marqués par joueurs</div>
+    </div>
+    
   </div>
 </div>
 
+
 <div class="d-flex justify-content-center row mt-3">
-  <div #div1 class="border border-dark col-2">
-    <div class="text-center">Dernier march</div>
+  <div #div1 [ngClass]="{'selected-text': selectedPeriodeStates[0],'selected-background': selectedPeriodeStates[0] }" (click)="selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates')" class="col-2 border border-dark">
+    <div class="text-center">Dernier match</div>
   </div>
-  <div #div2 class="border border-dark col-2">
+  <div #div2 [ngClass]="{'selected-text': selectedPeriodeStates[1], 'selected-background': selectedPeriodeStates[1]}" (click)="selectionChanged('Période', 'Dernier mois', 1, 'selectedPeriodeStates')" class="col-2 border border-dark">
     <div class="text-center">Dernier mois</div>
   </div>
-  <div #div3 class="border border-dark col-2">
-    <div class="text-center">Six derniers mois</div>
+  <div #div3 [ngClass]="{'selected-text': selectedPeriodeStates[2], 'selected-background': selectedPeriodeStates[2]}" (click)="selectionChanged('Période', 'Dernier six mois', 2, 'selectedPeriodeStates')" class="col-2 border border-dark">
+    <div class="text-center">Dernier six mois</div>
   </div>
-  <div #div4 class="border border-dark col-2">
-    <div class="text-center">Saison en cours</div>
+  <div #div4 [ngClass]="{'selected-text': selectedPeriodeStates[3], 'selected-background': selectedPeriodeStates[3]}" (click)="selectionChanged('Période', 'Dernier saison', 3, 'selectedPeriodeStates')" class="col-2 border border-dark">
+    <div class="text-center">Dernier saison</div>
   </div>
 </div>
