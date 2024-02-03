@@ -5,6 +5,7 @@ import { ChampionshipInterface } from './shared/interfaces/championship.interfac
 
 
 
+
 @Component({
   selector: 'app-championships',
   standalone: true,
@@ -13,6 +14,7 @@ import { ChampionshipInterface } from './shared/interfaces/championship.interfac
   styleUrl: './championships-list.component.css',
 })
 export class ChampionshipsListComponent {
+
   
   championships: ChampionshipInterface[]=[];
 
@@ -36,18 +38,6 @@ export class ChampionshipsListComponent {
     });
   }
 
-
-  // Fonction pour basculer la visibilité des équipes
-  /*toggleTeamVisibility(championshipId: number): void {
-    this.championships.forEach(championship => {
-      this.teamVisibility[championship.id] = false;
-    });
-    this.teamVisibility[championshipId] = !this.teamVisibility[championshipId];
-  }
-
-  getDefaultStatistique(team_id:string){
-    console.log("team id : "+team_id)
-  }*/
 
 }
 

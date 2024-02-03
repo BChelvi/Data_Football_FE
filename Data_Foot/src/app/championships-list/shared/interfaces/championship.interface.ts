@@ -9,4 +9,5 @@ export interface ChampionshipInterface {
 	confederation: string;
 	url: string;
 	country_id: number;
+	clubs:any;
 }

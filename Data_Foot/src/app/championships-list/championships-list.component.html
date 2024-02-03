@@ -1,20 +1,26 @@
-<div *ngIf="championships.length > 0; else noChampionships" class="p-3 border rounded">
-    <div>championnats :</div>
-    <ul>
-      <li *ngFor="let championship of championships">
-        <div>{{ championship.name }} </div>
-            <!--<ul *ngIf="teamVisibility[championship.id]">
-                <li *ngFor="let team of championship.teams">
-                    <div (click)="getDefaultStatistique(team.id)">{{ team.name }} </div>
-                </li>
-            </ul>-->
-      </li>
-    </ul>
-  </div>
-  
+
+    <div *ngIf="championships.length > 0; else noChampionships" class=" border rounded">
+      <div class="d-flex justify-content-center championnat">
+        <div class=" border rounded col-10 text-center p-1 bg-primary text-light">Championnat</div>
+      </div>
+
+
+          <div *ngFor="let championship of championships">
+            <div class="border rounded mt-2 d-flex justify-content-between zoom team">
+              <div class="p-1">{{ championship.name }} </div>
+              <div class="border">img</div>
+            </div>
+                <ul >
+                    <li *ngFor="let club of championship.clubs">
+                        <div >{{ club.name }} </div>
+                    </li>
+                </ul>
+          </div>
+    </div>
   <ng-template #noChampionships>
     <p>Aucun championnat trouvé.</p>
   </ng-template>
-  
-  <p *ngIf="error">{{ error }}</p>
 
+  <p *ngIf="error">{{ error }}</p>
+  <!-- (click)="getDefaultStatistique(club.club_id)" -->
+  <!-- *ngIf="teamVisibility[championship.competition_id]" -->
