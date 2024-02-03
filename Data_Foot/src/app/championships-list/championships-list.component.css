@@ -1,0 +1,12 @@
+.zoom:hover{
+    font-size: larger;
+    opacity: 1;
+}
+
+.team{
+    opacity : 0.8;
+}
+
+.championnat{
+    position: relative; bottom: 20px;
+}

@@ -5,6 +5,7 @@ import { ChampionshipInterface } from './shared/interfaces/championship.interfac
 
 
 
+
 @Component({
   selector: 'app-championships',
   standalone: true,
@@ -13,6 +14,7 @@ import { ChampionshipInterface } from './shared/interfaces/championship.interfac
   styleUrl: './championships-list.component.css',
 })
 export class ChampionshipsListComponent {
+
   
   championships: ChampionshipInterface[]=[];
 
@@ -20,33 +22,22 @@ export class ChampionshipsListComponent {
     // Injection du service ChampionshipsService via le constructeur
   constructor(private championshipsService: ChampionshipsListService) {}
 
-  teamVisibility: { [championshipId: number]: boolean } = {};
+  //teamVisibility: { [championshipId: number]: boolean } = {};
 
   ngOnInit(): void {
     this.championshipsService.loadChampionships().subscribe({
       next: (championships: ChampionshipInterface[]) => {
         this.championships = championships;
+        console.log(this.championships)
         // Initialiser l'état de visibilité pour chaque championnat
-        championships.forEach(championship => {
+        /*championships.forEach(championship => {
           this.teamVisibility[championship.id] = false;
-        });
+        });*/
       },
       // pensez a rajouter l'erreur de l'observable
     });
   }
 
-
-  // Fonction pour basculer la visibilité des équipes
-  toggleTeamVisibility(championshipId: number): void {
-    this.championships.forEach(championship => {
-      this.teamVisibility[championship.id] = false;
-    });
-    this.teamVisibility[championshipId] = !this.teamVisibility[championshipId];
-  }
-
-  getDefaultStatistique(team_id:string){
-    console.log("team id : "+team_id)
-  }
 
 }
 
