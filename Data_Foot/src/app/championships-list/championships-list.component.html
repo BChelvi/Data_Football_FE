@@ -12,7 +12,7 @@
             </div>
                 <ul *ngIf="teamVisibility[championship.competition_id]">
                     <li *ngFor="let club of championship.clubs">
-                        <div >{{ club.name }} </div>
+                        <div (click)="clubClicked(championship.competition_id, club.name)">{{ club.name }} </div>
                     </li>
                 </ul>
           </div>

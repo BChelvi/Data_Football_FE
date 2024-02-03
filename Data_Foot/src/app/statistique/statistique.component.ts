@@ -4,6 +4,8 @@ import { StatistiqueService } from '../statistique.service';
 import { SelectionProperties } from '../championships-list/shared/interfaces/selection.interface';
 import { GraphiqueComponent } from '../graphique/graphique.component';
 
+
+
 @Component({
   selector: 'app-statistique',
   templateUrl: './statistique.component.html',
@@ -27,13 +29,20 @@ export class StatistiqueComponent implements AfterViewInit {
   selectedStatStates: boolean[] = [false, false, false]; // Un élément par division statistique
   selectedPeriodeValue: string = '';
   selectedStatistiqueValue : string ='';
+  selectedClub : string='';
+
+
 
   isSelected: SelectionProperties = new SelectionProperties();
 
-  constructor(private statistiqueService: StatistiqueService) {}
+  constructor(
+    private statistiqueService: StatistiqueService,
+  
+    ) {}
 
   ngAfterViewInit() {
     this.setupClickObservables();
+
   }
 
   setupClickObservables() {
@@ -70,4 +79,7 @@ export class StatistiqueComponent implements AfterViewInit {
     console.log('Période sélectionnée:', this.selectedPeriode , 'Statistique sélectionnée:', this.selectedStatistique);
 
   }
+
+
+
 }

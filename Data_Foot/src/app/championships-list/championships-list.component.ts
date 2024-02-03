@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component,Output,EventEmitter  } from '@angular/core';
+import { CommonModule} from '@angular/common';
 import { ChampionshipsListService } from '../championships-list.service';
 import { ChampionshipInterface } from './shared/interfaces/championship.interface';
-
+import { TeamService } from '../team.service';
 
 
 
@@ -20,7 +20,10 @@ export class ChampionshipsListComponent {
 
   error: string = '';
     // Injection du service ChampionshipsService via le constructeur
-  constructor(private championshipsService: ChampionshipsListService) {}
+  constructor(
+    private championshipsService: ChampionshipsListService,
+    private teamService: TeamService
+    ) {}
 
   teamVisibility: { [championshipId: string]: boolean } = {};
 
@@ -36,6 +39,12 @@ export class ChampionshipsListComponent {
       },
       // pensez a rajouter l'erreur de l'observable
     });
+
+  }
+
+  updateTeamInfo() {
+    const teamInfo = { id: '123', name: 'Nom de l\'équipe' };
+    this.teamService.updateTeamInfo(teamInfo);
   }
 
   toggleTeamVisibility(championshipId: string): void {
@@ -48,11 +57,17 @@ export class ChampionshipsListComponent {
 
     // Basculez la visibilité du championnat actuel
     this.teamVisibility[championshipId] = !this.teamVisibility[championshipId];
+
   }
+
     // Ajoutez une méthode pour vérifier la visibilité des équipes
-    isTeamVisible(championshipId: string): boolean {
-      return this.teamVisibility[championshipId];
-    }
+  isTeamVisible(championshipId: string): boolean {
+    return this.teamVisibility[championshipId];
+  }
+
+  clubClicked(championshipId: string, clubId: string): void {
+    this.teamService.updateTeamInfo({ id: championshipId, name: clubId });
+  }
 
 
 }
