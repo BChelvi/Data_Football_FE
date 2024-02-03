@@ -28,7 +28,6 @@ export class ChampionshipsListComponent {
     this.championshipsService.loadChampionships().subscribe({
       next: (championships: ChampionshipInterface[]) => {
         this.championships = championships;
-        console.log(this.championships)
         // Initialiser l'état de visibilité pour chaque championnat
         /*championships.forEach(championship => {
           this.teamVisibility[championship.id] = false;

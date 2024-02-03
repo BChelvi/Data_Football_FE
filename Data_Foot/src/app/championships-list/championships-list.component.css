@@ -1,6 +1,8 @@
 .zoom:hover{
-    font-size: larger;
+    /* font-size: larger; */
     opacity: 1;
+    /* transform: scale(1.1); */
+    font-weight: bolder;
 }
 
 .team{
