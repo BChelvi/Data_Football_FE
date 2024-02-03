@@ -17,12 +17,18 @@ export class ChampionshipsListService {
     return this.http.get<ApiResponse>(ChampionshipsListService.url)
     .pipe(
       map(response => {
-        // Transformer chaque élément du tableau
-        response.results = response.results.map(championship => {
-          // Modifier le nom du championnat
-          championship.name = this.transformChampionshipName(championship.name);
-          return championship;
-        });
+        // Filtrer les championnats avec des clubs non vides et last-season égale à 2023
+        response.results = response.results
+          .filter(championship => championship.clubs && championship.clubs.length > 0)
+          .map(championship => {
+            // Filtrer les clubs avec last_season égale à 2023
+            championship.clubs = championship.clubs
+              .filter((club: any) => club['last_season'] === 2023); 
+
+            // Modifier le nom du championnat
+            championship.name = this.transformChampionshipName(championship.name);
+            return championship;
+          });
 
         return response.results;
       })

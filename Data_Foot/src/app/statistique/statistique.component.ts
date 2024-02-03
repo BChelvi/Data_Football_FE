@@ -25,7 +25,8 @@ export class StatistiqueComponent implements AfterViewInit {
   selectedStatistique: string = '';
   selectedPeriodeStates: boolean[] = [false, false, false, false]; // Un élément par division période
   selectedStatStates: boolean[] = [false, false, false]; // Un élément par division statistique
-
+  selectedPeriodeValue: string = '';
+  selectedStatistiqueValue : string ='';
 
   isSelected: SelectionProperties = new SelectionProperties();
 
@@ -57,12 +58,15 @@ export class StatistiqueComponent implements AfterViewInit {
       this.selectedPeriode = value;
       // Réinitialiser les états des autres #div
       this.selectedPeriodeStates = this.selectedPeriodeStates.map((_, i) => i === index);
+      this.selectedPeriodeValue = this.selectedPeriode;
     } else if (type === 'Statistique') {
       this.selectedStatistique = value;
       // Réinitialiser les états des autres #stat
       this.selectedStatStates = this.selectedStatStates.map((_, i) => i === index);
+      this.selectedStatistiqueValue = this.selectedStatistique;
     }
-  
+    // this.periode.nativeElement.innerHTML=this.selectedPeriode;
+    console.log(this.selectedPeriode)
     console.log('Période sélectionnée:', this.selectedPeriode , 'Statistique sélectionnée:', this.selectedStatistique);
 
   }
