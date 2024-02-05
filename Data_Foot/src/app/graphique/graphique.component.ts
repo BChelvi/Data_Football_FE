@@ -17,6 +17,39 @@ export class GraphiqueComponent{
   selectedPeriode : string = '';
   selectedStatistique : string= "";
 
+  singleData :any = [
+    {
+      name: "Victoire",
+      value: 60
+    },
+    {
+      name: "Défaite",
+      value: 40
+    },
+
+  ];
+
+  multiData :any = [
+    {
+      name: "USA",
+      series: [
+        {
+          name: "24 fevrier",
+          value: 1
+        },
+        {
+          name: "30 mars",
+          value: 3
+        },
+        {
+          name: "15 avril",
+          value: 4
+        }
+      ]
+    },
+  
+  ];
+
 
   constructor(
     private dataService: DataServiceService,

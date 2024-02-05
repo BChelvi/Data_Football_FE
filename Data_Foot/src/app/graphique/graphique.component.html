@@ -1,4 +1,5 @@
-<ngx-charts-bar-vertical 
+<div *ngIf="selectedStatistique=='Buts marqués'">
+    <ngx-charts-bar-vertical 
     [results]="saleData"
     [xAxisLabel]="'Products'"
     [legendTitle]="'Product Sale Chart'"
@@ -9,7 +10,30 @@
     [xAxis]="true"
     [yAxis]="true"
     [gradient]="true">
-</ngx-charts-bar-vertical>
+    </ngx-charts-bar-vertical>
+</div>
+<div *ngIf="selectedStatistique=='Ratio'">
+    <ngx-charts-pie-chart
+      [results]="singleData"
+      [gradient]="true"
+      [labels]="true"
+      [doughnut]="false"
+      >
+    </ngx-charts-pie-chart>
+</div>
+<div *ngIf="selectedStatistique=='Buts marqués par joueur'">
+    <ngx-charts-line-chart
+        [xAxis]="true"
+        [yAxis]="true"
+
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Matchs"
+        yAxisLabel="Nombre de Buts"
+        [results]="multiData"
+    >
+    </ngx-charts-line-chart>
+</div> 
 <div>
     <div class="d-flex">Infos récupérés par les observables</div>
     <div class="d-flex">
