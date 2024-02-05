@@ -1,3 +1,5 @@
+//service qui gère l'envoie des requetes
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,4 +27,9 @@ export class DataServiceService {
   getsaleData() {
     return this.saleData;
   }
+
+  getParams(club:string,statistique:string,periode:string){
+    console.log(club,"/",statistique,"/",periode)
+  }
+
 }

@@ -21,9 +21,9 @@
 
 
 <div class="d-flex justify-content-center row mt-3">
-  <div #div1 [ngClass]="{'selected-text': selectedPeriodeStates[0],'selected-background': selectedPeriodeStates[0] }" (click)="selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates')" class="col-2 border border-dark">
+  <!-- <div #div1 [ngClass]="{'selected-text': selectedPeriodeStates[0],'selected-background': selectedPeriodeStates[0] }" (click)="selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates')" class="col-2 border border-dark">
     <div class="text-center">Dernier match</div>
-  </div>
+  </div> -->
   <div #div2 [ngClass]="{'selected-text': selectedPeriodeStates[1], 'selected-background': selectedPeriodeStates[1]}" (click)="selectionChanged('Période', 'Dernier mois', 1, 'selectedPeriodeStates')" class="col-2 border border-dark">
     <div class="text-center">Dernier mois</div>
   </div>
@@ -31,6 +31,6 @@
     <div class="text-center">Dernier six mois</div>
   </div>
   <div #div4 [ngClass]="{'selected-text': selectedPeriodeStates[3], 'selected-background': selectedPeriodeStates[3]}" (click)="selectionChanged('Période', 'Dernier saison', 3, 'selectedPeriodeStates')" class="col-2 border border-dark">
-    <div class="text-center">Dernier saison</div>
+    <div class="text-center">Dernière saison</div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+//service qui load la liste des championnats et les équipes y participants
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject,map } from 'rxjs';

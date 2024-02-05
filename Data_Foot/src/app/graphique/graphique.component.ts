@@ -28,36 +28,45 @@ export class GraphiqueComponent{
     this.saleData = this.dataService.getsaleData();
   }
 
+  //on souscript après la vue des composants crées
   ngAfterViewInit() {
     this.setupTeamInfoSubscription();
     this.setupStatInfoSubscription();
   }
 
+  //souscription à l'observable du club selectionné
   setupTeamInfoSubscription() {
     this.teamInfoSubscription = this.teamService.getTeamInfoObservable().subscribe({
       next: (teamInfo: { id: string; name: string }) => {
-        // Faites quelque chose avec les informations sur l'équipe
-        console.log(`Championship ID: ${teamInfo.id}, Team Name: ${teamInfo.name}`);
         this.selectedClub = teamInfo.name;
+
+        //on envoie au service les nouveaux paramètre
+        this.dataService.getParams(this.selectedClub,this.selectedPeriode,this.selectedStatistique)
       },
     });
   }
 
+  //souscription à l'observable de la periode et de la statistique selectionnées
   setupStatInfoSubscription() {
     this.statInfoSubscription = this.teamService.getStatInfoObservable().subscribe({
       next: (statsInfo: { statistique: string; periode: string }) => {
-        // Faites quelque chose avec les informations sur l'équipe
-        console.log(`Statistique: ${statsInfo.statistique}, Periode: ${statsInfo.periode}`);
         this.selectedPeriode = statsInfo.periode;
         this.selectedStatistique = statsInfo.statistique;
+
+        //on envoie au service les nouveaux paramètre
+        this.dataService.getParams(this.selectedClub,this.selectedPeriode,this.selectedStatistique)
+
       },
     });
   }
 
-
+  //lifecycle end
   ngOnDestroy(): void {
     if (this.teamInfoSubscription) {
       this.teamInfoSubscription.unsubscribe();
+    }
+    if (this.statInfoSubscription) {
+      this.statInfoSubscription.unsubscribe();
     }
   }
 

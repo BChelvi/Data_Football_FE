@@ -1,3 +1,5 @@
+//service qui update les infos selectionnées : club, periode et statistique
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 

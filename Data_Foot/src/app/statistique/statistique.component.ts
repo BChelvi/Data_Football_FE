@@ -75,24 +75,15 @@ export class StatistiqueComponent implements AfterViewInit {
       this.selectedStatStates = this.selectedStatStates.map((_, i) => i === index);
       this.selectedStatistiqueValue = this.selectedStatistique;
     }
-    // this.periode.nativeElement.innerHTML=this.selectedPeriode;
-    console.log(this.selectedPeriode)
-    console.log('Période sélectionnée:', this.selectedPeriode , 'Statistique sélectionnée:', this.selectedStatistique);
 
     //on envoie au service l'update des stats pour l'observable
     this.teamService.updateStatsInfo({ statistique: this.selectedStatistique, periode: this.selectedPeriode });
 
   }
 
-    // renvoie au service qui met à jour les infos teams
+    // méthode qui renvoie au service qui met à jour les infos teams
     updateStatsInfo() {
       const statsInfo = { statistique: 'statistique', periode: 'periode' };
       this.teamService.updateStatsInfo(statsInfo);
     }
-
-
-     //methode qui envoie en paramètres les infos du club clické vers la méthode précédente
-  clubClicked(championshipId: string, clubId: string): void {
-    this.teamService.updateTeamInfo({ id: championshipId, name: clubId });
-  }
 }
