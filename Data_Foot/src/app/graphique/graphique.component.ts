@@ -13,7 +13,12 @@ import { TeamService } from '../team.service';
 export class GraphiqueComponent{
   saleData: any;
   teamInfoSubscription: any;
+  statInfoSubscription: any;
   selectedClub : string='';
+  selectedPeriode : string = '';
+  selectedStatistique : string= "";
+
+
   constructor(
     private dataService: DataServiceService,
     private teamService: TeamService
@@ -25,6 +30,7 @@ export class GraphiqueComponent{
 
   ngAfterViewInit() {
     this.setupTeamInfoSubscription();
+    this.setupStatInfoSubscription();
   }
 
   setupTeamInfoSubscription() {
@@ -36,6 +42,18 @@ export class GraphiqueComponent{
       },
     });
   }
+
+  setupStatInfoSubscription() {
+    this.statInfoSubscription = this.teamService.getStatInfoObservable().subscribe({
+      next: (statsInfo: { statistique: string; periode: string }) => {
+        // Faites quelque chose avec les informations sur l'équipe
+        console.log(`Statistique: ${statsInfo.statistique}, Periode: ${statsInfo.periode}`);
+        this.selectedPeriode = statsInfo.periode;
+        this.selectedStatistique = statsInfo.statistique;
+      },
+    });
+  }
+
 
   ngOnDestroy(): void {
     if (this.teamInfoSubscription) {

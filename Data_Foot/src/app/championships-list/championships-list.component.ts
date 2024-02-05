@@ -42,11 +42,6 @@ export class ChampionshipsListComponent {
 
   }
 
-  updateTeamInfo() {
-    const teamInfo = { id: '123', name: 'Nom de l\'équipe' };
-    this.teamService.updateTeamInfo(teamInfo);
-  }
-
   toggleTeamVisibility(championshipId: string): void {
     // Réinitialisez la visibilité de tous les autres championnats
     Object.keys(this.teamVisibility).forEach(id => {
@@ -54,20 +49,29 @@ export class ChampionshipsListComponent {
         this.teamVisibility[id] = false;
       }
     });
-
+    
     // Basculez la visibilité du championnat actuel
     this.teamVisibility[championshipId] = !this.teamVisibility[championshipId];
-
+    
   }
-
-    // Ajoutez une méthode pour vérifier la visibilité des équipes
+  
+  // Ajoutez une méthode pour vérifier la visibilité des équipes
   isTeamVisible(championshipId: string): boolean {
     return this.teamVisibility[championshipId];
   }
 
+  // renvoie au service qui met à jour les infos teams
+  updateTeamInfo() {
+    const teamInfo = { id: '123', name: 'Nom de l\'équipe' };
+    this.teamService.updateTeamInfo(teamInfo);
+  }
+
+  //methode qui envoie en paramètres les infos du club clické vers la méthode précédente
   clubClicked(championshipId: string, clubId: string): void {
     this.teamService.updateTeamInfo({ id: championshipId, name: clubId });
   }
+
+
 
 
 }
