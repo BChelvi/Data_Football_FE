@@ -12,8 +12,12 @@ import { TeamService } from '../team.service';
 })
 export class GraphiqueComponent{
   saleData: any;
-  teamInfoSubscription: any;
+  paramsSubscription: any;
   selectedClub : string='';
+  selectedPeriode : string = '';
+  selectedStatistique : string= "";
+
+
   constructor(
     private dataService: DataServiceService,
     private teamService: TeamService
@@ -23,24 +27,28 @@ export class GraphiqueComponent{
     this.saleData = this.dataService.getsaleData();
   }
 
+  //on souscript après la vue des composants créée
   ngAfterViewInit() {
-    this.setupTeamInfoSubscription();
+    this.setupParamsSubscription();
   }
 
-  setupTeamInfoSubscription() {
-    this.teamInfoSubscription = this.teamService.getTeamInfoObservable().subscribe({
-      next: (teamInfo: { id: string; name: string }) => {
-        // Faites quelque chose avec les informations sur l'équipe
-        console.log(`Championship ID: ${teamInfo.id}, Team Name: ${teamInfo.name}`);
-        this.selectedClub = teamInfo.name;
+  //souscription à l'observable des paramètres selectionnés
+  setupParamsSubscription() {
+    this.paramsSubscription = this.teamService.getParamInfoObservable().subscribe({
+      next: (params: { club: string, statistique: string; periode: string }) => {
+        this.selectedPeriode = params.periode;
+        this.selectedStatistique = params.statistique;
+        this.selectedClub = params.club;
       },
     });
   }
 
+  //lifecycle end
   ngOnDestroy(): void {
-    if (this.teamInfoSubscription) {
-      this.teamInfoSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
     }
+
   }
 
 }

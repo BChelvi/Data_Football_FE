@@ -1,6 +1,8 @@
+//service qui gère l'envoie des requetes
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -112,10 +114,12 @@ export class DataServiceService {
   getsaleData() {
     return this.saleData;
   }
+
   getmultiData() {
     return this.multiData;
   }
   getsingleData() {
     return this.singleData
   }
+
 }
