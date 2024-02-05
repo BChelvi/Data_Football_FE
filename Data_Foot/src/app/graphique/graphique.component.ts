@@ -12,8 +12,7 @@ import { TeamService } from '../team.service';
 })
 export class GraphiqueComponent{
   saleData: any;
-  teamInfoSubscription: any;
-  statInfoSubscription: any;
+  paramsSubscription: any;
   selectedClub : string='';
   selectedPeriode : string = '';
   selectedStatistique : string= "";
@@ -28,46 +27,28 @@ export class GraphiqueComponent{
     this.saleData = this.dataService.getsaleData();
   }
 
-  //on souscript après la vue des composants crées
+  //on souscript après la vue des composants créée
   ngAfterViewInit() {
-    this.setupTeamInfoSubscription();
-    this.setupStatInfoSubscription();
+    this.setupParamsSubscription();
   }
 
-  //souscription à l'observable du club selectionné
-  setupTeamInfoSubscription() {
-    this.teamInfoSubscription = this.teamService.getTeamInfoObservable().subscribe({
-      next: (teamInfo: { id: string; name: string }) => {
-        this.selectedClub = teamInfo.name;
-
-        //on envoie au service les nouveaux paramètre
-        this.dataService.getParams(this.selectedClub,this.selectedPeriode,this.selectedStatistique)
-      },
-    });
-  }
-
-  //souscription à l'observable de la periode et de la statistique selectionnées
-  setupStatInfoSubscription() {
-    this.statInfoSubscription = this.teamService.getStatInfoObservable().subscribe({
-      next: (statsInfo: { statistique: string; periode: string }) => {
-        this.selectedPeriode = statsInfo.periode;
-        this.selectedStatistique = statsInfo.statistique;
-
-        //on envoie au service les nouveaux paramètre
-        this.dataService.getParams(this.selectedClub,this.selectedPeriode,this.selectedStatistique)
-
+  //souscription à l'observable des paramètres selectionnés
+  setupParamsSubscription() {
+    this.paramsSubscription = this.teamService.getParamInfoObservable().subscribe({
+      next: (params: { club: string, statistique: string; periode: string }) => {
+        this.selectedPeriode = params.periode;
+        this.selectedStatistique = params.statistique;
+        this.selectedClub = params.club;
       },
     });
   }
 
   //lifecycle end
   ngOnDestroy(): void {
-    if (this.teamInfoSubscription) {
-      this.teamInfoSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
     }
-    if (this.statInfoSubscription) {
-      this.statInfoSubscription.unsubscribe();
-    }
+
   }
 
 }

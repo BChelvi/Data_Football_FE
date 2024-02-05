@@ -80,10 +80,4 @@ export class StatistiqueComponent implements AfterViewInit {
     this.teamService.updateStatsInfo({ statistique: this.selectedStatistique, periode: this.selectedPeriode });
 
   }
-
-    // méthode qui renvoie au service qui met à jour les infos teams
-    updateStatsInfo() {
-      const statsInfo = { statistique: 'statistique', periode: 'periode' };
-      this.teamService.updateStatsInfo(statsInfo);
-    }
 }

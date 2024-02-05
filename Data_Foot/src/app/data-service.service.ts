@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,6 @@ export class DataServiceService {
     return this.saleData;
   }
 
-  getParams(club:string,statistique:string,periode:string){
-    console.log(club,"/",statistique,"/",periode)
-  }
+
 
 }
