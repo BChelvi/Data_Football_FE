@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StatistiqueService } from '../statistique.service';
 import { SelectionProperties } from '../championships-list/shared/interfaces/selection.interface';
 import { GraphiqueComponent } from '../graphique/graphique.component';
+import { TeamService } from '../team.service';
 
 
 
@@ -37,7 +38,7 @@ export class StatistiqueComponent implements AfterViewInit {
 
   constructor(
     private statistiqueService: StatistiqueService,
-  
+    private teamService: TeamService
     ) {}
 
   ngAfterViewInit() {
@@ -61,7 +62,7 @@ export class StatistiqueComponent implements AfterViewInit {
 
   }
 
-  //fonction qui changent l'état des périodes et statistiques et récupère leurs valeurs
+  //fonction qui changent l'état des périodes et statistiques et récupère leurs valeurs puis les envoie au service
   selectionChanged(type: string, value: string, index: number, statesArray: 'selectedPeriodeStates' | 'selectedStatStates') {
     if (type === 'Période') {
       this.selectedPeriode = value;
@@ -74,12 +75,9 @@ export class StatistiqueComponent implements AfterViewInit {
       this.selectedStatStates = this.selectedStatStates.map((_, i) => i === index);
       this.selectedStatistiqueValue = this.selectedStatistique;
     }
-    // this.periode.nativeElement.innerHTML=this.selectedPeriode;
-    console.log(this.selectedPeriode)
-    console.log('Période sélectionnée:', this.selectedPeriode , 'Statistique sélectionnée:', this.selectedStatistique);
+
+    //on envoie au service l'update des stats pour l'observable
+    this.teamService.updateStatsInfo({ statistique: this.selectedStatistique, periode: this.selectedPeriode });
 
   }
-
-
-
 }

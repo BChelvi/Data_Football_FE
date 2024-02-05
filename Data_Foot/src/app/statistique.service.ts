@@ -1,3 +1,5 @@
+//service pour la selection des statistiques et des periodes
+
 import { Injectable } from '@angular/core';
 import { Observable, fromEvent } from 'rxjs';
 import { ElementRef } from '@angular/core';
