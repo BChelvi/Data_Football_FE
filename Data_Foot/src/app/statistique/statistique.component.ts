@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { StatistiqueService } from '../statistique.service';
 import { SelectionProperties } from '../championships-list/shared/interfaces/selection.interface';
 import { GraphiqueComponent } from '../graphique/graphique.component';
+
+import { Graphique2Component } from '../graphique-2/graphique-2.component';
+import { Graphique3Component } from '../graphique-3/graphique-3.component';
+
 import { TeamService } from '../team.service';
+
 
 
 
@@ -11,7 +16,7 @@ import { TeamService } from '../team.service';
   selector: 'app-statistique',
   templateUrl: './statistique.component.html',
   styleUrls: ['./statistique.component.css'],
-  imports:[GraphiqueComponent,CommonModule],
+  imports:[Graphique3Component, Graphique2Component, GraphiqueComponent, CommonModule],
   standalone:true
 })
 export class StatistiqueComponent implements AfterViewInit {
