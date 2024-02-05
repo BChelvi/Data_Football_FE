@@ -24,18 +24,18 @@ export class Graphique2Component {
   }
 
   ngAfterViewInit() {
-    this.setupTeamInfoSubscription();
+    // this.setupTeamInfoSubscription();
   }
 
-  setupTeamInfoSubscription() {
-    this.teamInfoSubscription = this.teamService.getTeamInfoObservable().subscribe({
-      next: (teamInfo: { id: string; name: string }) => {
-        // Faites quelque chose avec les informations sur l'équipe
-        console.log(`Championship ID: ${teamInfo.id}, Team Name: ${teamInfo.name}`);
-        this.selectedClub = teamInfo.name;
-      },
-    });
-  }
+  // setupTeamInfoSubscription() {
+  //   this.teamInfoSubscription = this.teamService.getTeamInfoObservable().subscribe({
+  //     next: (teamInfo: { id: string; name: string }) => {
+  //       // Faites quelque chose avec les informations sur l'équipe
+  //       console.log(`Championship ID: ${teamInfo.id}, Team Name: ${teamInfo.name}`);
+  //       this.selectedClub = teamInfo.name;
+  //     },
+  //   });
+  // }
 
   ngOnDestroy(): void {
     if (this.teamInfoSubscription) {
