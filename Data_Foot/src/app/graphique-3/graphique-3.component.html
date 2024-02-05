@@ -1,0 +1,23 @@
+<ngx-charts-pie-chart
+  [results]="singleData"
+  [gradient]="true"
+  [legend]="true"
+  [labels]="true"
+  [doughnut]="false"
+  >
+</ngx-charts-pie-chart>
+<div>
+    <div class="d-flex">Infos récupérés par les observables</div>
+    <div class="d-flex">
+        <div>Nom de l'équipe :</div>
+        <div class="text-center">{{ selectedClub }}</div>
+    </div>
+    <div class="d-flex">
+        <div>Periode:</div>
+        <!-- <div class="text-center">{{ selectedPeriodeValue }}</div> -->
+    </div>
+    <div class="d-flex">
+        <div>Stats :</div>
+        <!-- <div class="text-center">{{ selectedStatistiqueValue }}</div> -->
+    </div>
+</div>

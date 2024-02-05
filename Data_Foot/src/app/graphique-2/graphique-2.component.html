@@ -1,0 +1,26 @@
+<ngx-charts-line-chart
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    xAxisLabel="Temps"
+    yAxisLabel="Progression"
+    [results]="multiData"
+  >
+</ngx-charts-line-chart>
+<div>
+  <div class="d-flex">Infos récupérés par les observables</div>
+  <div class="d-flex">
+      <div>Nom de l'équipe :</div>
+      <div class="text-center">{{ selectedClub }}</div>
+  </div>
+  <div class="d-flex">
+      <div>Periode:</div>
+      <!-- <div class="text-center">{{ selectedPeriodeValue }}</div> -->
+  </div>
+  <div class="d-flex">
+      <div>Stats :</div>
+      <!-- <div class="text-center">{{ selectedStatistiqueValue }}</div> -->
+  </div>
+</div>
