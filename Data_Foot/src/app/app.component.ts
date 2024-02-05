@@ -4,6 +4,8 @@ import { ChampionshipsListComponent } from './championships-list/championships-l
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StatistiqueComponent } from "./statistique/statistique.component";
 import { GraphiqueComponent } from "./graphique/graphique.component";
+import { Graphique2Component } from './graphique-2/graphique-2.component';
+import { Graphique3Component } from './graphique-3/graphique-3.component';
 import { TeamService } from './team.service';
 
 @Component({
@@ -11,7 +13,7 @@ import { TeamService } from './team.service';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, ChampionshipsListComponent, NgxChartsModule, StatistiqueComponent, GraphiqueComponent]
+    imports: [RouterOutlet, ChampionshipsListComponent, NgxChartsModule, StatistiqueComponent, GraphiqueComponent, Graphique2Component, Graphique3Component]
 })
 export class AppComponent {
 
