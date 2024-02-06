@@ -23,7 +23,9 @@ export class ChampionshipsListComponent {
   constructor(
     private championshipsService: ChampionshipsListService,
     private teamService: TeamService
-    ) {}
+    ) {
+      
+    }
 
   teamVisibility: { [championshipId: string]: boolean } = {};
 

@@ -26,10 +26,10 @@ export class StatistiqueComponent implements AfterViewInit {
   @ViewChild('stat2') stat2!: ElementRef;
   @ViewChild('stat3') stat3!: ElementRef;
 
-  selectedPeriode: string = 'Dernier mois';
-  selectedStatistique: string = 'Ratio';
-  selectedPeriodeStates: boolean[] = [false, true, false, false]; // Un élément par division période
-  selectedStatStates: boolean[] = [false, true, false]; // Un élément par division statistique
+  selectedPeriode: string = 'Dernière saison';
+  selectedStatistique: string = 'But marqués';
+  selectedPeriodeStates: boolean[] = [false, false, false, true]; // Un élément par division période
+  selectedStatStates: boolean[] = [true, false, false]; // Un élément par division statistique
   selectedPeriodeValue: string = '';
   selectedStatistiqueValue : string ='';
   // selectedClub : string='Montpellier Hérault Sport Club';
@@ -41,7 +41,12 @@ export class StatistiqueComponent implements AfterViewInit {
   constructor(
     private statistiqueService: StatistiqueService,
     private teamService: TeamService
-    ) {}
+    ) {
+
+
+      this.selectedStatistique = 'Buts marqués'; // Par exemple, 'Ratio' comme valeur par défaut
+      this.selectedPeriode = 'Dernier mois'; // Par exemple, 'Dernier mois' comme valeur par défaut
+    }
 
     ngOnInit() {
       // Vous pouvez également appeler votre méthode de mise à jour ici pour envoyer les valeurs par défaut au service
