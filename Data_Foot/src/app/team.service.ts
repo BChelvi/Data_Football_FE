@@ -19,17 +19,20 @@ export class TeamService {
   constructor(private http:HttpClient) {
     combineLatest([this.teamInfoSubject, this.statSubject])
       .pipe(
-        map(([teamInfo, statInfo]) => ({
-          club: teamInfo.name,
-          statistique: statInfo.statistique,
-          periode: statInfo.periode
-        })),
-        //on appelle la méthode qui envoie la requête http
-        // switchMap(params => this.getDataFromApi(params))
-        // catchError(_ => of('no more requests!!!'))       
+        switchMap(([teamInfo, statInfo]) => {
+          const combinedData = {
+            club: teamInfo.id,
+            statistique: statInfo.statistique,
+            periode: statInfo.periode
+          };
+          const url = this.buildUrl(combinedData.club, combinedData.statistique, combinedData.periode);
+          return this.getDataFromApi(url);
+        })
+        
       )
-      .subscribe((combinedData) => {
-        this.paramSubject.next(combinedData);
+      .subscribe((data) => {
+        // Faites ce que vous voulez avec les données récupérées de la requête HTTP
+        this.paramSubject.next(data);
       });
 
 
@@ -60,11 +63,29 @@ export class TeamService {
     this.statSubject.next(statsInfo);
   }
 
-  //methode pour la requête http
-  private getDataFromApi(params: { club: string, statistique: string; periode: string }): Observable<any> {
-    
-    const url = `your/api/endpoint?club=${params.club}&statistique=${params.statistique}&periode=${params.periode}`;
+   // Méthode pour construire l'URL de requête en fonction de la statistique
+    private buildUrl(club: string, statistique: string, periode: string): string {
+      let endpoint = '';
+      // Sélectionnez dynamiquement l'endpoint en fonction de la statistique
+      switch (statistique) {
+        case 'Buts marqués':
+          endpoint = 'club_games';
+          break;
+        case 'stat2':
+          endpoint = 'endpoint2';
+          break;
+        // Ajoutez d'autres cas pour chaque statistique
+        default:
+          endpoint = 'club_games';
+      }
+      return `http://localhost:8001/${endpoint}/?club=${club}&season=2023`;
+      // http://localhost:8001/club_games/?club=105&season=2022
+    }
 
+
+  //methode pour la requête http
+  // Méthode pour la requête HTTP
+  private getDataFromApi(url: string): Observable<any> {
     return this.http.get(url);
   }
 
