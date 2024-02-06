@@ -12,3 +12,7 @@
 .selected-text-stat{
     color : red
 }
+
+.cursor-pointer{
+    cursor: pointer;
+  }

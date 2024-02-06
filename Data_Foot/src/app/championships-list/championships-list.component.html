@@ -1,26 +1,31 @@
-
-    <div *ngIf="championships.length > 0; else noChampionships" class=" border rounded">
+<div *ngIf="championships.length > 0; else noChampionships" class="">
+  
+  <div class="d-flex justify-content-between  ">
+    <div class="w-50 border rounded">
       <div class="d-flex justify-content-center championnat">
         <div class=" border rounded col-10 text-center p-1 bg-primary text-light">Championnat</div>
       </div>
-
-
-          <div *ngFor="let championship of championships">
-            <div class="border rounded mt-2 d-flex justify-content-between zoom team"  (click)="toggleTeamVisibility(championship.competition_id)">
-              <div class="p-1">{{ championship.name }} </div>
-              <div class="border">img</div>
-            </div>
-                <ul *ngIf="teamVisibility[championship.competition_id]">
-                    <li *ngFor="let club of championship.clubs">
-                        <div (click)="clubClicked(club.club_id, club.name)">{{ club.name }} </div>
-                    </li>
-                </ul>
-          </div>
+      <div *ngFor="let championship of championships" class="border rounded zoom team d-flex justify-content-between cursor-pointer " (click)="toggleTeamVisibility(championship.competition_id)">
+        <div class="p-1">{{ championship.name }}</div>
+        <div class="border">img</div>
+      </div>
     </div>
-  <ng-template #noChampionships>
-    <p>Aucun championnat trouvé.</p>
-  </ng-template>
 
-  <p *ngIf="error">{{ error }}</p>
-  <!-- (click)="getDefaultStatistique(club.club_id)" -->
-  <!-- *ngIf="teamVisibility[championship.competition_id]" -->
+    <div class="w-50">
+      <ng-container *ngFor="let championship of championships">
+        <div *ngIf="teamVisibility[championship.competition_id]" class="border rounded">
+          <div class="d-flex justify-content-center championnat">
+            <div class=" border rounded col-10 text-center p-1 bg-primary text-light">{{championship.name}}</div>
+          </div>
+          <div *ngFor="let club of championship.clubs" class="text-center p-1">
+            <div (click)="clubClicked(club.club_id, club.name)" class="cursor-pointer zoom">{{ club.name }}</div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #noChampionships>
+  <p>Aucun championnat trouvé.</p>
+</ng-template>

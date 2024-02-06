@@ -12,3 +12,11 @@
 .championnat{
     position: relative; bottom: 20px;
 }
+
+ul {
+    list-style: none;
+  }
+
+.cursor-pointer{
+    cursor: pointer;
+  }

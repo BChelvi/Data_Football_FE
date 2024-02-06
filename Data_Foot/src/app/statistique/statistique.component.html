@@ -1,30 +1,30 @@
 <div class="d-flex row  justify-content-center">
-  <div class="col-8 object-fit-contain">
+  <div class="col-10 object-fit-contain">
     <app-graphique></app-graphique>
     <div class="d-flex justify-content-center row mt-3">
       <!-- <div #div1 [ngClass]="{'selected-text': selectedPeriodeStates[0],'selected-background': selectedPeriodeStates[0] }" (click)="selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates')" class="col-2 border border-dark">
         <div class="text-center">Dernier match</div>
       </div> -->
       <div #div2 [ngClass]="{'selected-text': selectedPeriodeStates[1], 'selected-background': selectedPeriodeStates[1]}" (click)="selectionChanged('Période', 'Dernier mois', 1, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
-        <div class="text-center">Dernier mois</div>
+        <div class="text-center cursor-pointer">Dernier mois</div>
       </div>
       <div #div3 [ngClass]="{'selected-text': selectedPeriodeStates[2], 'selected-background': selectedPeriodeStates[2]}" (click)="selectionChanged('Période', 'Dernier six mois', 2, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
-        <div class="text-center">Dernier six mois</div>
+        <div class="text-center cursor-pointer">Dernier six mois</div>
       </div>
       <div #div4 [ngClass]="{'selected-text': selectedPeriodeStates[3], 'selected-background': selectedPeriodeStates[3]}" (click)="selectionChanged('Période', 'Dernier saison', 3, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
-        <div class="text-center">Dernière saison</div>
+        <div class="text-center cursor-pointer">Dernière saison</div>
       </div>
     </div>
   </div>
   <div class="col-2">
     <div #stat1 [ngClass]="{'selected-text': selectedStatStates[0], 'selected-background': selectedStatStates[0]}" (click)="selectionChanged('Statistique', 'Buts marqués', 0, 'selectedStatStates')" class="border rounded mb-4 p-2">
-      <div class="text-center">Buts marqués</div>
+      <div class="text-center cursor-pointer">Buts marqués</div>
     </div>
     <div #stat2 [ngClass]="{'selected-text': selectedStatStates[1], 'selected-background': selectedStatStates[1]}" (click)="selectionChanged('Statistique', 'Ratio', 1, 'selectedStatStates')" class="border rounded mb-4 p-2">
-      <div class="text-center">Ratio</div>
+      <div class="text-center cursor-pointer">Ratio</div>
     </div>
     <div #stat3 [ngClass]="{'selected-text': selectedStatStates[2], 'selected-background': selectedStatStates[2]}" (click)="selectionChanged('Statistique', 'Buts marqués par joueur', 2, 'selectedStatStates')" class="border rounded mb-4 p-2">
-      <div class="text-center">Buts marqués par joueurs</div>
+      <div class="text-center cursor-pointer">Buts marqués par joueurs</div>
     </div>
     
   </div>
