@@ -19,7 +19,7 @@ export class ChampionshipsListService {
     return this.http.get<ApiResponse>(ChampionshipsListService.url)
     .pipe(
       map(response => {
-        // Filtrer les championnats avec des clubs non vides et last-season égale à 2023
+        // Filtrer les championnats avec des clubs non vides et last-season égale à 2023 ==> !! déja fait en backend
         response.results = response.results
           .filter(championship => championship.clubs && championship.clubs.length > 0)
           .map(championship => {

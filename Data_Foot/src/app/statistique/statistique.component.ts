@@ -17,7 +17,7 @@ import { TeamService } from '../team.service';
   standalone:true
 })
 export class StatistiqueComponent implements AfterViewInit {
-  @ViewChild('div1') div1!: ElementRef;
+  // @ViewChild('div1') div1!: ElementRef;
   @ViewChild('div2') div2!: ElementRef;
   @ViewChild('div3') div3!: ElementRef;
   @ViewChild('div4') div4!: ElementRef;
@@ -26,13 +26,13 @@ export class StatistiqueComponent implements AfterViewInit {
   @ViewChild('stat2') stat2!: ElementRef;
   @ViewChild('stat3') stat3!: ElementRef;
 
-  selectedPeriode: string = '';
-  selectedStatistique: string = '';
-  selectedPeriodeStates: boolean[] = [false, false, false, false]; // Un élément par division période
-  selectedStatStates: boolean[] = [false, false, false]; // Un élément par division statistique
+  selectedPeriode: string = 'Dernier mois';
+  selectedStatistique: string = 'Ratio';
+  selectedPeriodeStates: boolean[] = [false, true, false, false]; // Un élément par division période
+  selectedStatStates: boolean[] = [false, true, false]; // Un élément par division statistique
   selectedPeriodeValue: string = '';
   selectedStatistiqueValue : string ='';
-  selectedClub : string='';
+  // selectedClub : string='Montpellier Hérault Sport Club';
 
 
 
@@ -43,6 +43,11 @@ export class StatistiqueComponent implements AfterViewInit {
     private teamService: TeamService
     ) {}
 
+    ngOnInit() {
+      // Vous pouvez également appeler votre méthode de mise à jour ici pour envoyer les valeurs par défaut au service
+      this.teamService.updateStatsInfo({ statistique: this.selectedStatistique, periode: this.selectedPeriode });
+    }
+  
   ngAfterViewInit() {
     this.setupClickObservables();
 
@@ -51,14 +56,14 @@ export class StatistiqueComponent implements AfterViewInit {
   setupClickObservables() {
 
     //souscription sur les observable des periodes
-    this.statistiqueService.getClickObservable(this.div1).subscribe(() => this.selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates'));
+    // this.statistiqueService.getClickObservable(this.div1).subscribe(() => this.selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates'));
     this.statistiqueService.getClickObservable(this.div2).subscribe(() => this.selectionChanged('Période', 'Dernier mois', 1, 'selectedPeriodeStates'));
     this.statistiqueService.getClickObservable(this.div3).subscribe(() => this.selectionChanged('Période', 'Dernier six mois', 2, 'selectedPeriodeStates'));
     this.statistiqueService.getClickObservable(this.div4).subscribe(() => this.selectionChanged('Période', 'Derniere saison', 3, 'selectedPeriodeStates'));
 
     //souscription sur les observable des statistiques
     this.statistiqueService.getClickObservable(this.stat1).subscribe(() => this.selectionChanged('Statistique', 'Buts marqués', 0, 'selectedStatStates'));
-    this.statistiqueService.getClickObservable(this.stat2).subscribe(() => this.selectionChanged('Statistique', 'Ratio Victoires / Défaites', 1, 'selectedStatStates'));
+    this.statistiqueService.getClickObservable(this.stat2).subscribe(() => this.selectionChanged('Statistique', 'Ratio', 1, 'selectedStatStates'));
     this.statistiqueService.getClickObservable(this.stat3).subscribe(() => this.selectionChanged('Statistique', 'Buts marqués par joueur', 2, 'selectedStatStates'));
 
 

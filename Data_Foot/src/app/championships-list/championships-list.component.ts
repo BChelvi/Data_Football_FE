@@ -67,8 +67,8 @@ export class ChampionshipsListComponent {
   }
 
   //methode qui envoie en paramètres les infos du club clické à destination du service
-  clubClicked(championshipId: string, clubId: string): void {
-    this.teamService.updateTeamInfo({ id: championshipId, name: clubId });
+  clubClicked(club_Id: string, name: string): void {
+    this.teamService.updateTeamInfo({ id: club_Id, name: name });
   }
 
 

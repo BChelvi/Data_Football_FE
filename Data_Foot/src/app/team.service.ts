@@ -31,6 +31,12 @@ export class TeamService {
       .subscribe((combinedData) => {
         this.paramSubject.next(combinedData);
       });
+      // Initialiser les valeurs par défaut
+    // this.paramSubject.next({ club:'Montpellier Hérault Sport Club', statistique: 'Ratio', periode: 'Dernier mois' });
+
+    const defaultTeamInfo = { id: '969', name: 'Montpellier Hérault Sport Club' };
+    this.updateTeamInfo(defaultTeamInfo);
+
   }
 
   getParamInfoObservable(): Observable<{ club: string, statistique: string; periode: string }> {
@@ -45,7 +51,7 @@ export class TeamService {
   // getStatInfoObservable(): Observable<{ statistique: string; periode: string }> {
   //   return this.statSubject.asObservable();
   // }
-
+  
   //methode qui met à jour le club selectionné
   updateTeamInfo(teamInfo: { id: string; name: string }) {
     this.teamInfoSubject.next(teamInfo);
