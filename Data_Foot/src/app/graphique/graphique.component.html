@@ -2,21 +2,23 @@
 <div class="d-flex justify-content-center mb-4">
     <h2>{{selectedClub}}</h2>
 </div>
-<div *ngIf="selectedStatistique=='Buts marqués'" class="mt-4">
-    <ngx-charts-bar-vertical 
-    [results]="saleData"
-    [xAxisLabel]="'Products'"
-    [yAxisLabel]="'Sale'"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    [xAxis]="true"
-    [yAxis]="true"
-    [gradient]="true">
-    </ngx-charts-bar-vertical>
+<div  class="mt-4"  *ngIf="selectedStatistique=='Buts marqués'">
+    <ngx-charts-line-chart
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Matchs"
+        yAxisLabel="Nombre de Buts"
+        [results]="graphDataGoals"
+        [showGridLines]="false"
+        [scheme]="'forest'"
+    >
+    </ngx-charts-line-chart>
 </div>
 <div *ngIf="selectedStatistique=='Ratio'">
     <ngx-charts-pie-chart
-      [results]="singleData"
+      [results]=""
       [gradient]="true"
       [labels]="true"
       [doughnut]="false"
@@ -32,15 +34,15 @@
         [showYAxisLabel]="true"
         xAxisLabel="Matchs"
         yAxisLabel="Nombre de Buts"
-        [results]="multiData"
+        [results]=""
     >
     </ngx-charts-line-chart>
 </div> 
-<div>
+<!-- <div>
     <div class="d-flex">Infos récupérés par les observables</div>
     <div class="d-flex">
         <div>Nom de l'équipe :</div>
-        <div class="text-center">{{ selectedClub }}</div>
+        <div class="text-center">{{selectedClub}}</div>
     </div>
     <div class="d-flex">
         <div>Periode:</div>
@@ -50,4 +52,4 @@
         <div>Stats :</div>
         <div class="text-center">{{ selectedStatistique }}
     </div>
-</div>
+</div> -->
