@@ -16,16 +16,16 @@
     >
     </ngx-charts-line-chart>
 </div>
-<div *ngIf="selectedStatistique=='Ratio'">
+<div class="mt-4" *ngIf="selectedStatistique=='Ratio'">
     <ngx-charts-pie-chart
-      [results]=""
       [gradient]="true"
       [labels]="true"
       [doughnut]="false"
+      [results]="graphDataRatio"
       >
     </ngx-charts-pie-chart>
 </div>
-<div *ngIf="selectedStatistique=='Buts marqués par joueur'">
+<div class="mt-4" *ngIf="selectedStatistique=='Buts marqués par joueur'">
     <ngx-charts-line-chart
         [xAxis]="true"
         [yAxis]="true"

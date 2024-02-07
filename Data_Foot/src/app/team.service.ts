@@ -21,12 +21,20 @@ export class TeamService {
       .pipe(
         switchMap(([teamInfo, statInfo]) => {
           const combinedData = {
-            club: teamInfo.id,
+            club_id: teamInfo.id,
+            club :teamInfo.name,
             statistique: statInfo.statistique,
             periode: statInfo.periode
           };
-          const url = this.buildUrl(combinedData.club, combinedData.statistique, combinedData.periode);
-          return this.getDataFromApi(url);
+          const url = this.buildUrl(combinedData.club_id, combinedData.statistique, combinedData.periode);
+          return this.getDataFromApi(url).pipe(
+            map((dataFromApi) => ({ 
+              ...dataFromApi, // on rajoute des propriété à la réponse
+              selectedStatistique: combinedData.statistique, // Add the new property
+              selectedClub: combinedData.club, // Add the new property
+              selectedPeriode: combinedData.periode
+            }))
+          );
         })
         
       )

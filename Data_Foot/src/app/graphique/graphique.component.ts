@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class GraphiqueComponent{
   graphDataGoals: any[] =[];
+  graphDataRatio : any[]=[];
   paramsSubscription: any;
   selectedClub : string='';
   selectedPeriode : string = '';
@@ -21,43 +22,18 @@ export class GraphiqueComponent{
   graphData: any;
   requete:any;
 
-  datatest:any =[
+  dataset:any=[
     {
       "name": "Germany",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7300000,
-          "min": 7000000,
-          "max": 7600000
-        },
-        {
-          "name": "2011",
-          "value": 8940000,
-          "min": 8840000,
-          "max": 9300000
-        }
-      ]
+      "value": 8940000
     },
-  
     {
       "name": "USA",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7870000,
-          "min": 7800000,
-          "max": 7950000
-        },
-        {
-          "name": "2011",
-          "value": 8270000,
-          "min": 8170000,
-          "max": 8300000
-        }
-      ]
+      "value": 5000000
     }
   ]
+
+
 
   private updateChart$: Subject<void> = new Subject<void>();
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -87,16 +63,41 @@ export class GraphiqueComponent{
     this.paramsSubscription = this.teamService.getParamInfoObservable().subscribe({
       next: (params: { club: string, statistique: string; periode: string }) => {
         this.requete = params;
-        this.graphData =this.requete.results;
-        this.selectedClub = this.graphData[0].club.name
-        if (this.graphData && this.graphData.length > 0) {
-          this.transformData(this.graphData);
-          this.updateChart$.next();
-        } else {
-          console.error('Les données simulées sont vides ou non définies.');
-        }
+        this.selectedStatistique=this.requete.selectedStatistique
+        this.selectedClub =this.requete.selectedClub
 
-      },
+        //on verifie qu'on recupère bien de la data par la requete
+        if(this.requete.results){
+          this.graphData =this.requete.results;
+          //on verifie que la data existe et n'est pas vide
+          if (this.graphData && this.graphData.length > 0) {
+            switch (this.selectedStatistique) {
+              // si la statitique selectionné est Buts marqué
+              case 'Buts marqués':
+                // on verifie que l'observable retourne bien les resultats de la requete http
+                this.transformDataGoals(this.graphData);
+                break;
+              //si la statistique selectionnée est Ratio
+              case 'Ratio':
+                this.transformDataRatio(this.graphData);                
+                break;
+              // si la statistique selectionnée est but maqués
+              case 'Buts marqués par joueurs':
+                
+                break;
+              // Ajoutez d'autres cas pour chaque statistique
+              default:
+                break;
+              }
+          }
+          else {
+            console.error('Les données simulées sont vides ou non définies.');
+          }
+        }
+        else {
+          console.error('La requête ne possède pas de données');
+        }
+      }
     });
   }
 
@@ -108,8 +109,35 @@ export class GraphiqueComponent{
     this.ngUnsubscribe.next();
   }
 
-  transformData(data: any) {
-    this.graphDataGoals = [{ name: 'buts', series: [] }]; // Créez un tableau contenant un objet avec une clé "name"
+  transformDataRatio(data: any) {
+    this.graphDataRatio = []; // On vide graphDataRatio
+    let totalVictoire: number = 0;
+    
+    // On boucle sur les données pour compter les victoires
+    for (const item of data) {
+      if (item.is_win === 1) {
+        totalVictoire += 1;
+      }
+    }
+  
+    // Création de l'objet pour les victoires
+    const victoire = {
+      name: "victoire",
+      value: totalVictoire
+    };
+    this.graphDataRatio.push(victoire);
+  
+    // Création de l'objet pour les défaites
+    const defeat = {
+      name: "défaite",
+      value: data.length - totalVictoire
+    };
+    this.graphDataRatio.push(defeat);
+    this.updateChart$.next();
+  }
+
+  transformDataGoals(data: any) {
+    this.graphDataGoals = [{ name: 'buts', series: [] }]; // Créez un tableau vide contenant un objet avec une clé "name"
     let series: any[] = [];
     for (const item of data) {
         series.push({ name: item.game.date, value: item.own_goals,min:"0",max:"10" });
@@ -119,18 +147,14 @@ export class GraphiqueComponent{
   }
 
   subscribeToUpdateChart() {
+    console.log(this.graphDataRatio)
     this.updateChart$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         // Mettez à jour le graphique ici
         this.graphDataGoals = [...this.graphDataGoals];
-        console.log(this.graphDataGoals);
       });
   }
 
-  // updateChart() {
-  //   console.log(this.graphDataGoals);
-  //   this.updateChart$.next();
-  // }
 
 }
