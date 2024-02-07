@@ -66,20 +66,38 @@ export class TeamService {
    // Méthode pour construire l'URL de requête en fonction de la statistique
     private buildUrl(club: string, statistique: string, periode: string): string {
       let endpoint = '';
+      let time ='';
       // Sélectionnez dynamiquement l'endpoint en fonction de la statistique
       switch (statistique) {
         case 'Buts marqués':
           endpoint = 'club_games';
           break;
-        case 'stat2':
-          endpoint = 'endpoint2';
+        case 'Ratio':
+          endpoint = 'club_games';
+          break;
+        // Ajoutez d'autres cas pour chaque statistique
+        case 'Buts marqués par joueurs':
+          endpoint = 'club_games';
           break;
         // Ajoutez d'autres cas pour chaque statistique
         default:
           endpoint = 'club_games';
+        // switch (periode) {
+        //   case '':
+        //     time = '';          
+        //     break;
+        //   case 'stat2':
+        //     time = '';
+        //     break;
+        //   // Ajoutez d'autres cas pour chaque statistique
+        //   default:
+        //     time = '';
       }
-      return `http://localhost:8001/${endpoint}/?club=${club}&season=2023`;
+      return `http://localhost:8001/${endpoint}/?club=${club}&${periode}`;
       // http://localhost:8001/club_games/?club=105&season=2022
+      // http://localhost:8001/club_games/?club=969&min_date=2023-06-01
+
+
     }
 
 

@@ -66,7 +66,7 @@ export class GraphiqueComponent{
     private dataService: DataServiceService,
     private teamService: TeamService
     ) {
-      this.selectedPeriode = 'Dernière Saison';
+      this.selectedPeriode = 'season=2023';
       this.selectedStatistique = 'Buts marqués';
     }
 
