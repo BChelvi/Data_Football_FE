@@ -54,13 +54,13 @@ export class GraphiqueComponent{
   //on souscript après la vue des composants créée
   ngAfterViewInit() {
     this.setupParamsSubscription();
-    this.subscribeToUpdateChart();
+    // this.subscribeToUpdateChart();
 
   }
 
   //souscription à l'observable des paramètres selectionnés
   setupParamsSubscription() {
-    this.paramsSubscription = this.teamService.getParamInfoObservable().subscribe({
+    this.paramsSubscription = this.teamService.myobserbable.subscribe({
       next: (params: { club: string, statistique: string; periode: string }) => {
         this.requete = params;
         this.selectedStatistique=this.requete.selectedStatistique
@@ -109,6 +109,7 @@ export class GraphiqueComponent{
     this.ngUnsubscribe.next();
   }
 
+  //methode pour transformer les data pour afficher le Ratio Victoire/défaite
   transformDataRatio(data: any) {
     this.graphDataRatio = []; // On vide graphDataRatio
     let totalVictoire: number = 0;
@@ -133,9 +134,10 @@ export class GraphiqueComponent{
       value: data.length - totalVictoire
     };
     this.graphDataRatio.push(defeat);
-    this.updateChart$.next();
+    // this.updateChart$.next();
   }
 
+  //methode pour transformer les data pour afficher les buts marqués par l'équipe
   transformDataGoals(data: any) {
     this.graphDataGoals = [{ name: 'buts', series: [] }]; // Créez un tableau vide contenant un objet avec une clé "name"
     let series: any[] = [];
@@ -143,18 +145,19 @@ export class GraphiqueComponent{
         series.push({ name: item.game.date, value: item.own_goals,min:"0",max:"10" });
     }
     this.graphDataGoals[0].series = series; // Affectez le tableau series à la clé "series" du premier objet dans graphDataGoals
-    this.updateChart$.next();
+    // this.updateChart$.next();
   }
 
-  subscribeToUpdateChart() {
-    console.log(this.graphDataRatio)
-    this.updateChart$
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        // Mettez à jour le graphique ici
-        this.graphDataGoals = [...this.graphDataGoals];
-      });
-  }
+  // //observable sur la modification des data
+  // subscribeToUpdateChart() {
+  //   console.log(this.graphDataRatio)
+  //   this.updateChart$
+  //     .pipe(takeUntil(this.ngUnsubscribe))
+  //     .subscribe(() => {
+  //       // Mettez à jour le graphique ici
+  //       // this.graphDataGoals = [...this.graphDataGoals];
+  //     });
+  // }
 
 
 }
