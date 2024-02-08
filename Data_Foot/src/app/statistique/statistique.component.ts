@@ -26,7 +26,7 @@ export class StatistiqueComponent implements AfterViewInit {
   @ViewChild('stat2') stat2!: ElementRef;
   @ViewChild('stat3') stat3!: ElementRef;
 
-  selectedPeriode: string = 'Dernière saison';
+  selectedPeriode: string = 'season=2023';
   selectedStatistique: string = 'But marqués';
   selectedPeriodeStates: boolean[] = [false, false, false, true]; // Un élément par division période
   selectedStatStates: boolean[] = [true, false, false]; // Un élément par division statistique
@@ -45,7 +45,7 @@ export class StatistiqueComponent implements AfterViewInit {
 
 
       this.selectedStatistique = 'Buts marqués'; // Par exemple, 'Ratio' comme valeur par défaut
-      this.selectedPeriode = 'Dernier mois'; // Par exemple, 'Dernier mois' comme valeur par défaut
+      this.selectedPeriode = 'min_date=2022-06-01&max_date=2023-06-30'; // Par exemple, 'Dernier mois' comme valeur par défaut
     }
 
     ngOnInit() {
@@ -62,9 +62,9 @@ export class StatistiqueComponent implements AfterViewInit {
 
     //souscription sur les observable des periodes
     // this.statistiqueService.getClickObservable(this.div1).subscribe(() => this.selectionChanged('Période', 'Dernier match', 0, 'selectedPeriodeStates'));
-    this.statistiqueService.getClickObservable(this.div2).subscribe(() => this.selectionChanged('Période', 'Dernier mois', 1, 'selectedPeriodeStates'));
-    this.statistiqueService.getClickObservable(this.div3).subscribe(() => this.selectionChanged('Période', 'Dernier six mois', 2, 'selectedPeriodeStates'));
-    this.statistiqueService.getClickObservable(this.div4).subscribe(() => this.selectionChanged('Période', 'Derniere saison', 3, 'selectedPeriodeStates'));
+    this.statistiqueService.getClickObservable(this.div2).subscribe(() => this.selectionChanged('Période', 'min_date=2023-05-01&max_date=2023-06-30', 1, 'selectedPeriodeStates'));
+    this.statistiqueService.getClickObservable(this.div3).subscribe(() => this.selectionChanged('Période', 'min_date=2023-01-01&max_date=2023-06-30', 2, 'selectedPeriodeStates'));
+    this.statistiqueService.getClickObservable(this.div4).subscribe(() => this.selectionChanged('Période',  'min_date=2022-06-01&max_date=2023-06-30', 3, 'selectedPeriodeStates'));
 
     //souscription sur les observable des statistiques
     this.statistiqueService.getClickObservable(this.stat1).subscribe(() => this.selectionChanged('Statistique', 'Buts marqués', 0, 'selectedStatStates'));

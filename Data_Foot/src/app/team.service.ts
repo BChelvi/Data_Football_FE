@@ -1,7 +1,7 @@
 //service qui update les infos selectionnées : club, periode et statistique et effectue les requêtes http
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable,combineLatest,map,switchMap, catchError, throwError,tap,of } from 'rxjs';
+import { BehaviorSubject, Observable,combineLatest,map,switchMap, catchError, throwError,tap,of, shareReplay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -14,26 +14,36 @@ export class TeamService {
 
 
   private paramSubject = new BehaviorSubject<{ club: string, statistique: string; periode: string }>({ club:'',statistique: '', periode: '' });
+  public myobserbable : Observable<any>
 
   //on combine les deux subjects
   constructor(private http:HttpClient) {
-    combineLatest([this.teamInfoSubject, this.statSubject])
+    this.myobserbable =  combineLatest([this.teamInfoSubject, this.statSubject])
       .pipe(
         switchMap(([teamInfo, statInfo]) => {
           const combinedData = {
-            club: teamInfo.id,
+            club_id: teamInfo.id,
+            club :teamInfo.name,
             statistique: statInfo.statistique,
             periode: statInfo.periode
           };
-          const url = this.buildUrl(combinedData.club, combinedData.statistique, combinedData.periode);
-          return this.getDataFromApi(url);
-        })
+          const url = this.buildUrl(combinedData.club_id, combinedData.statistique, combinedData.periode);
+          return this.getDataFromApi(url).pipe(
+            map((dataFromApi) => ({ 
+              ...dataFromApi, // on rajoute des propriété à la réponse
+              selectedStatistique: combinedData.statistique, // Add the new property
+              selectedClub: combinedData.club, // Add the new property
+              selectedPeriode: combinedData.periode
+            }))
+          );
+        }),
+        shareReplay()//requete exécuté une seule fois
         
       )
-      .subscribe((data) => {
-        // Faites ce que vous voulez avec les données récupérées de la requête HTTP
-        this.paramSubject.next(data);
-      });
+      // .subscribe((data) => {
+      //   // Faites ce que vous voulez avec les données récupérées de la requête HTTP
+      //   this.paramSubject.next(data);
+      // });
 
 
       const defaultTeamInfo = { id: '969', name: 'Montpellier' };
@@ -63,23 +73,35 @@ export class TeamService {
     this.statSubject.next(statsInfo);
   }
 
-   // Méthode pour construire l'URL de requête en fonction de la statistique
+   // Méthode pour construire l'URL de requête en fonction de la statistique/club et periode
+
     private buildUrl(club: string, statistique: string, periode: string): string {
       let endpoint = '';
+      let time ='';
       // Sélectionnez dynamiquement l'endpoint en fonction de la statistique
       switch (statistique) {
+
         case 'Buts marqués':
-          endpoint = 'club_games';
+          endpoint = `club_games/?club=${club}&${periode}`;
           break;
-        case 'stat2':
-          endpoint = 'endpoint2';
+
+        case 'Ratio':
+          endpoint = `club_games/?club=${club}&${periode}`;
           break;
-        // Ajoutez d'autres cas pour chaque statistique
+
+        case 'Buts marqués par joueur':
+          endpoint = `players/?current_club_id=${club}&${periode}`;
+          break;
+
         default:
-          endpoint = 'club_games';
+          endpoint = `club_games/?club=${club}&${periode}`;
       }
-      return `http://localhost:8001/${endpoint}/?club=${club}&season=2023`;
+      return `http://localhost:8001/${endpoint}`;
       // http://localhost:8001/club_games/?club=105&season=2022
+      // http://localhost:8001/club_games/?club=969&min_date=2023-06-01
+      //http://localhost:8001/players/?current_club_id=105&min_date=2015-12-31&max_date=2017-01-01
+
+
     }
 
 

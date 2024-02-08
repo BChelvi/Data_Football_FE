@@ -16,28 +16,28 @@
     >
     </ngx-charts-line-chart>
 </div>
-<div *ngIf="selectedStatistique=='Ratio'">
+<div class="mt-4" *ngIf="selectedStatistique=='Ratio'">
     <ngx-charts-pie-chart
-      [results]=""
       [gradient]="true"
       [labels]="true"
       [doughnut]="false"
+      [results]="graphDataRatio"
       >
     </ngx-charts-pie-chart>
 </div>
-<div *ngIf="selectedStatistique=='Buts marqués par joueur'">
-    <ngx-charts-line-chart
+<div class="mt-4" *ngIf="selectedStatistique=='Buts marqués par joueur'">
+    <ngx-charts-bar-horizontal
+        [results]="graphDataGoalsPlayers"
+        [gradient]="gradient"
         [xAxis]="true"
         [yAxis]="true"
-
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
-        xAxisLabel="Matchs"
-        yAxisLabel="Nombre de Buts"
-        [results]=""
-    >
-    </ngx-charts-line-chart>
-</div> 
+        xAxisLabel="Nombre de buts"
+        yAxisLabel="Joueur">
+    </ngx-charts-bar-horizontal>
+</div>
+
 <!-- <div>
     <div class="d-flex">Infos récupérés par les observables</div>
     <div class="d-flex">
