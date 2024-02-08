@@ -11,7 +11,7 @@
       <div #div3 [ngClass]="{'selected-text': selectedPeriodeStates[2], 'selected-background': selectedPeriodeStates[2]}" (click)="selectionChanged('Période', 'min_date=2023-01-01&max_date=2023-06-30', 2, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
         <div class="text-center cursor-pointer">Dernier six mois<br>Janvier 2023 - Juin 2023</div>
       </div>
-      <div #div4 [ngClass]="{'selected-text': selectedPeriodeStates[3], 'selected-background': selectedPeriodeStates[3]}" (click)="selectionChanged('Période', 'season=2022', 3, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
+      <div #div4 [ngClass]="{'selected-text': selectedPeriodeStates[3], 'selected-background': selectedPeriodeStates[3]}" (click)="selectionChanged('Période', 'min_date=2022-06-01&max_date=2023-06-30', 3, 'selectedPeriodeStates')" class="col-2 border border-dark p-2">
         <div class="text-center cursor-pointer">Dernière saison<br>2022-2023</div>
       </div>
     </div>

@@ -89,16 +89,17 @@ export class TeamService {
           endpoint = `club_games/?club=${club}&${periode}`;
           break;
 
-        case 'Buts marqués par joueurs':
-          endpoint = 'club_games';
+        case 'Buts marqués par joueur':
+          endpoint = `players/?current_club_id=${club}&${periode}`;
           break;
 
         default:
-          endpoint = 'club_games';
+          endpoint = `club_games/?club=${club}&${periode}`;
       }
       return `http://localhost:8001/${endpoint}`;
       // http://localhost:8001/club_games/?club=105&season=2022
       // http://localhost:8001/club_games/?club=969&min_date=2023-06-01
+      //http://localhost:8001/players/?current_club_id=105&min_date=2015-12-31&max_date=2017-01-01
 
 
     }

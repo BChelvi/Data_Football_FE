@@ -15,12 +15,22 @@ import { takeUntil } from 'rxjs/operators';
 export class GraphiqueComponent{
   graphDataGoals: any[] =[];
   graphDataRatio : any[]=[];
+  graphDataGoalsPlayers : any[]=[];
   paramsSubscription: any;
   selectedClub : string='';
   selectedPeriode : string = '';
   selectedStatistique : string= "";
   graphData: any;
   requete:any;
+
+  gradient: boolean = true;
+  // showXAxis: boolean = true;
+  // showYAxis: boolean = true;
+  // showLegend: boolean = true;
+  // showXAxisLabel: boolean = true;
+  // showYAxisLabel: boolean = true;
+  // xAxisLabel: string = 'Nom de l\'axe X';
+  // yAxisLabel: string = 'Nom de l\'axe Y';
 
   dataset:any=[
     {
@@ -31,7 +41,8 @@ export class GraphiqueComponent{
       "name": "USA",
       "value": 5000000
     }
-  ]
+  ];
+
 
 
 
@@ -82,8 +93,8 @@ export class GraphiqueComponent{
                 this.transformDataRatio(this.graphData);                
                 break;
               // si la statistique selectionnée est but maqués
-              case 'Buts marqués par joueurs':
-                
+              case 'Buts marqués par joueur':
+                this.transformDataGoalsPlayers(this.graphData);
                 break;
               // Ajoutez d'autres cas pour chaque statistique
               default:
@@ -144,9 +155,52 @@ export class GraphiqueComponent{
     for (const item of data) {
         series.push({ name: item.game.date, value: item.own_goals,min:"0",max:"10" });
     }
+    series.sort((a, b) => new Date(a.name).getTime() - new Date(b.name).getTime());
+    
     this.graphDataGoals[0].series = series; // Affectez le tableau series à la clé "series" du premier objet dans graphDataGoals
     // this.updateChart$.next();
+
+     // Filtrer les joueurs dont la valeur est différente de zéro
+   
   }
+
+  transformDataGoalsPlayers(data: any) {
+    console.log(data);
+    this.graphDataGoalsPlayers = [];
+  
+    for (const item of data) {
+      let but_total: number = 0;
+  
+      if (item.appearances.length > 0) {
+        for (const appearance of item.appearances) {
+          but_total += appearance.goals;
+        }
+      }
+      const player = {
+        name: item.name,
+        value: but_total
+      };
+  
+      this.graphDataGoalsPlayers.push(player);
+
+      // Trier graphDataGoalsPlayers par ordre décroissant sur la base de la propriété value (but_total)
+      this.graphDataGoalsPlayers.sort((a, b) => b.value - a.value);
+
+        // Filtrer les joueurs dont la valeur est différente de zéro
+      this.graphDataGoalsPlayers = this.graphDataGoalsPlayers.filter(player => player.value !== 0);
+    }
+  }
+
+  // [
+  //   {
+  //     "name":player_name,
+  //     "value":nbre_buts,
+  //   },
+  //   {
+  //     "name":player_name,
+  //     "value":nbre_buts,
+  //   },
+  // ]
 
   // //observable sur la modification des data
   // subscribeToUpdateChart() {
