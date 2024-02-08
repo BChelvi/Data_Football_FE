@@ -131,14 +131,6 @@ export class GraphiqueComponent{
         totalVictoire += 1;
       }
     }
-  
-    // Création de l'objet pour les victoires
-    const victoire = {
-      name: "victoire",
-      value: totalVictoire
-    };
-    this.graphDataRatio.push(victoire);
-  
     // Création de l'objet pour les défaites
     const defeat = {
       name: "défaite",
@@ -146,6 +138,14 @@ export class GraphiqueComponent{
     };
     this.graphDataRatio.push(defeat);
     // this.updateChart$.next();
+  
+    // Création de l'objet pour les victoires
+    const victoire = {
+      name: `victoire`,
+      value: totalVictoire
+    };
+    this.graphDataRatio.push(victoire);
+  
   }
 
   //methode pour transformer les data pour afficher les buts marqués par l'équipe
